@@ -2,77 +2,22 @@ local_backend: true
 
 backend:
   name: github
-  repo: chandara/pos-web
+  repo: 'raaa123445/pos-web'
   preview_context: 
   use_graphql: true
 
 media_folder: "src/assets/images" # Location where files will be stored in the repo
-public_folder: "/assets/images"   # The src attribute for uploaded media
+public_folder: "src/assets/images" # The src attribute for uploaded media
 
 collections:
-  - name: "posts"
-    label: "Posts"
-    folder: "content/posts"
-    create: true
-    slug: "{{slug}}"
-    fields:
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog" # Used in the UI
+    folder: "src/content/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields for each document, usually in frontmatter
+      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Publish Date", name: "publishedAt", widget: "datetime", required: true }
-      - { label: "Is Publish", name: "isPublish", widget: "boolean" }
-      - { label: "Is Draft", name: "isDraft", widget: "boolean" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image" }
+      - { label: "Rating (scale of 1-5)", name: "rating", widget: "number" }
       - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: "restaurants"
-    label: "Restaurants"
-    folder: "content/restaurants"
-    create: true
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Location", name: "location", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-
-  - name: "faq"
-    label: "FAQ"
-    folder: "content/faq"
-    create: true
-    fields:
-      - { label: "Question", name: "question", widget: "string" }
-      - { label: "Answer", name: "answer", widget: "markdown" }
-
-  - name: "settings"
-    label: "Settings"
-    files:
-      - label: "Global Settings"
-        name: "global"
-        file: "content/settings/global.yml"
-        fields:
-          - { label: "Site Title", name: "siteTitle", widget: "string" }
-          - { label: "Site Description", name: "siteDescription", widget: "text" }
-
-  - name: "pages"
-    label: "Pages"
-    folder: "content/pages"
-    create: true
-    nested:
-      depth: 2
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: "directory"
-    label: "Directory"
-    folder: "content/directory"
-    create: true
-    nested:
-      depth: 2
-    fields:
-      - { label: "Directory Name", name: "name", widget: "string" }
-
-  - name: "subdirectory"
-    label: "Sub Directory"
-    folder: "content/directory/subdirectory"
-    create: true
-    fields:
-      - { label: "Sub Directory Name", name: "name", widget: "string" }
-      - { label: "Description", name: "description", widget: "markdown" }
